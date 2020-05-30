@@ -1,0 +1,55 @@
+{% extends 'dashboard/layout.html' %}
+{% load static %}
+
+{% block content %}
+
+	<div class="row post-container">
+		<div class="col-lg-6">
+			<h3>Friendlist</h3>
+			<hr>
+			{% for friend in friends %}
+
+				{% if friend.friend_one == request.user %}
+
+					<i class="fas fa-user-circle fa-5x float-right cursor"></i>
+					<p>{{friend.friend_two}}</p>
+					<small>Friends since - {{friend.date}}</small>
+					<hr>
+
+				{% elif friend.friend_two == request.user %}
+
+					<i class="fas fa-user-circle fa-5x float-right cursor"></i>
+					<p>{{friend.friend_one}}</p>
+					<small>Friends since - {{friend.date}}</small>
+					<hr>
+					
+				{% endif %}
+
+			{% endfor %}
+		</div>
+		<div class="col-lg-6">
+			<h3>Friend requests</h3>
+			<hr>
+			{% for friend in friend_requests %}
+
+				{% if friend.request == request.user %}
+
+					<i class="fas fa-user-circle fa-5x float-right cursor"></i>
+					<p>{{friend.user}} has sent you a friend request</p>
+					<small>{{friend.date}}</small>
+
+					<br>
+					<br>
+
+					<a href="{% url 'friend_accept' username=friend.user.username %}" class="btn btn-success">Accept</a>
+					<a href="{% url 'friend_reject' username=friend.user.username %}" class="btn btn-danger">Reject</a>
+
+					<hr>
+					
+				{% endif %}
+
+			{% endfor %}
+		</div>
+	</div>
+
+{% endblock %}

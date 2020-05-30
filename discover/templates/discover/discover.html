@@ -1,0 +1,36 @@
+{% extends 'discover/layout.html' %}
+{% load static %}
+
+{% block content %}
+
+	{% for post in posts %}
+
+		<div class="row post-container">
+			<div class="col-lg-2">
+				<a href="{% url 'profile' username=post.userid.username %}"><i class="fas fa-user-circle fa-5x float-right cursor"></i></a>
+				</div>
+			<div class="col-lg-7">
+				<p>{{post.post}}</p>
+				<small class="post-stats cursor"><a style="color: black;" href="{% url 'like' id=post.id %}">Likes</a> <span class="badge badge-success">{{post.likes}}</span></small>
+				<small class="post-stats cursor"><a href="{% url 'comment' id=post.id %}">Comments</a> <span class="badge badge-info">{{post.comments}}</span></small>
+			</div>
+			<div class="col-lg-3">
+				<small>{{post.userid}}</small>
+				<small><br>{{post.date}}</small>
+			</div>
+		</div>
+		<hr>
+
+	{% endfor %}
+
+	{% if request.user.is_authenticated%}
+
+		<form class="fixed-bottom" method="post" action="{% url 'submit_post' %}">
+			{% csrf_token %}
+			<textarea class="form-control" placeholder="Message" maxlength="500" name="post" required></textarea>
+			<button type="submit" class="btn btn-success" style="width: 100%;">Submit post</button>
+		</form>
+
+	{% endif %}
+
+{% endblock %}

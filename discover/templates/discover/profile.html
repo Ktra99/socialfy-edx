@@ -1,0 +1,76 @@
+{% extends 'dashboard/layout.html' %}
+{% load static %}
+
+{% block content %}
+
+	<div class="row">
+		<div class="col-lg-3">
+			<ul class="list-group">
+				<li class="list-group-item" style="margin: 0 auto; border: none; padding-bottom:10%;"><i class="fas fa-user-circle fa-8x float-right"></i></li>
+
+				<li class="list-group-item center">{{user.username}}</li>
+
+				{% if follow_flag %}
+
+				<li class="list-group-item text-success center pointer">Following</li>
+
+				<li class="list-group-item center"><a href="{% url 'unfollow' username=user.username %}" class="btn btn-danger">Unfollow</a></li>
+
+				{% else %}
+
+				<li class="list-group-item">
+					<form class="center" method="post" action="{% url 'follow' username=user.username %}" style="padding:5% 0;">{% csrf_token %}
+						<button class="btn btn-success">Follow</button>
+					</form>
+				</li>
+
+				{% endif %}
+
+				{% if friend_flag %}
+
+				<li class="list-group-item text-warning center">Friend request pending</li>
+
+				{% elif friendship_flag %}
+
+				<li class="list-group-item text-success center">Friends</li>
+
+				{% else %}
+
+				<li class="list-group-item">
+					<form class="center" method="post" action="{% url 'friend_request' username=user.username %}">
+						{% csrf_token %}
+						<button class="btn btn-success">Send friend request</button>
+					</form>
+				</li>
+
+				{% endif %}
+
+			</ul>
+		</div>
+		<div class="col-lg-9">
+			{% for post in posts %}
+
+				{% if post.userid == request.user %}
+
+					<div class="row post-container">
+						<div class="col-lg-2">
+							<i class="fas fa-user-circle fa-5x float-right cursor"></i>
+							</div>
+						<div class="col-lg-7">
+							<p>{{post.post}}</p>
+							<small class="post-stats cursor">Likes <span class="badge badge-success">{{post.likes}}</span></small>
+							<small class="post-stats cursor">Comments <span class="badge badge-info">{{post.comments}}</span></small>
+						</div>
+						<div class="col-lg-3">
+							<small><br>{{post.date}}</small>
+						</div>
+					</div>
+					<hr>
+
+				{% endif %}
+
+			{% endfor %}
+		</div>
+	</div>
+
+{% endblock %}

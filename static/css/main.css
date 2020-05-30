@@ -1,0 +1,36 @@
+html, body{
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+body{
+	overflow-x: hidden;
+}
+
+a{
+	text-decoration: none !important;
+}
+
+.cursor{
+	cursor: pointer;
+}
+
+.pointer{
+	cursor: pointer;
+}
+
+.center{
+	text-align: center;
+}
+
+.post-stats{
+	padding: 0 0.5%;
+}
+
+.post-container{
+	padding: 1% 0;
+}
+
+#sidenav li a{
+	color: black !important;
+}

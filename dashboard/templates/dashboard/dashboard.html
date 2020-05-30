@@ -1,0 +1,36 @@
+{% extends 'dashboard/layout.html' %}
+{% load static %}
+
+{% block content %}
+
+	<div class="row">
+		<div class="col-lg-3">
+			<ul id="sidenav" class="list-group">
+				<li class="list-group-item" style="margin: 0 auto; border: none; padding-bottom:10%;"><i class="fas fa-user-circle fa-8x float-right"></i></li>
+
+				<!--
+				<li class="list-group-item"><form style="text-align: center; padding-bottom:10%;"><button class="btn btn-success">Follow</button></form></li>-->
+
+				<li class="list-group-item"><a href="{% url 'post' %}">Posts</a></li>
+				<li class="list-group-item">Followers <span class="badge badge-success">{{followers}}</li>
+				<li class="list-group-item"><a href="{% url 'friend' %}">Friends</a></li>
+			</ul>
+		</div>
+		<div class="col-lg-9">
+			<canvas id="myChart" height="120"></canvas>	
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block script %}
+
+	<script>
+		let likes = "{{likes}}";
+		let comments = "{{comments}}";
+		let followers = "{{followers}}";
+		let friends = "{{friends}}";
+		let posts = "{{posts}}";
+	</script>
+
+{% endblock %}

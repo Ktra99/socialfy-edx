@@ -1,0 +1,36 @@
+{% extends 'discover/layout.html' %}
+{% load static %}
+
+{% block content %}
+
+	{% for comment in comments %}
+		<!--{{comment.postid.id}}-->
+		<!--{{id}}-->
+		{% if comment.postid.id == id %}
+			<div class="row post-container">
+				<div class="col-lg-2">
+					<i class="fas fa-user-circle fa-5x float-right cursor"></i>
+					</div>
+				<div class="col-lg-7">
+					<p>{{comment.comment}}</p>
+				</div>
+				<div class="col-lg-3">
+					<small class="cursor">{{comment.userid}}</small>
+				</div>
+			</div>
+			<hr>
+		{% endif %}
+
+	{% endfor %}
+
+	{% if request.user.is_authenticated%}
+
+		<form class="fixed-bottom" method="post" action="{% url 'comment' id=id %}">
+			{% csrf_token %}
+			<textarea class="form-control" placeholder="Message" maxlength="500" name="comment" required></textarea>
+			<button type="submit" class="btn btn-success" style="width: 100%;">Submit comment</button>
+		</form>
+
+	{% endif %}
+
+{% endblock %}
