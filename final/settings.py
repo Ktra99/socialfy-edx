@@ -25,7 +25,7 @@ SECRET_KEY = 'ao(44iat^)$ij_2y1lio596aizavb+#%6t-)62sb3&&x71!05+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["socialfy-edx.herokuapp.com/", "127.0.0.1"]
+ALLOWED_HOSTS = ["socialfy-edx.herokuapp.com", "127.0.0.1"]
 
 
 # Application definition
